@@ -22,7 +22,7 @@ db.once('open', () => {
 })
 
 app.get('/', (req, res) => {
-    res.send("Running")
+    res.send("<p>Hiyaa!, go to <strong> /quotes </strong>  ...<strong> /quotes/random</strong> ..etc  </p>")
 })
 
 const QuotesRoutes = require('./routes/Quotes'); 
