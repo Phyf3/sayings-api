@@ -1,9 +1,18 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const cors = require('cors')
+
 
 const app = express();
 app.use(bodyParser.json())
+app.use(cors())
+app.use('/', express.static(path.join(__dirname, 'static')))
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 require('dotenv').config()
 const dbpassword = process.env.DB_PWD
@@ -20,11 +29,6 @@ const db = mongoose.connection;
 db.once('open', () => {
     console.log("Connected to MongoDB")
 })
-
-app.get('/', (req, res) => {
-    res.send("<p>Hiyaa!, go to <strong> /quotes </strong>  ...<strong> /quotes/random</strong> ..etc  </p>")
-})
-
 const QuotesRoutes = require('./routes/Quotes'); 
 
 app.use('/quotes', QuotesRoutes)
