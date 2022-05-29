@@ -12,6 +12,14 @@
 
     <button id="display" >all sayings</button>
 
+    <form action="" id = "create-form">
+        <input type="text" id="saying" placeholder="Add your own saying">
+        <input type="text" id="name" placeholder="name/nickname">
+    
+        <input type="submit" value="Create" id="create">
+    </form>
+   
+
     <script>
         const btn = document.getElementById('display');
         btn.addEventListener('click', displayAll)
@@ -20,8 +28,32 @@
             const result = await fetch('https://kquotes.herokuapp.com/quotes')
                 .then((res) => res.json())
 
+            console.log("all sayings",result);
+        }
+
+
+        const form = document.getElementById('create-form');
+        form.addEventListener('submit', addSaying)
+
+        async function addSaying(e) {
+            e.preventDefault();
+
+            const text = document.getElementById('saying').value
+            const by = document.getElementById('name').value
+
+
+            const result = await fetch('https://kquotes.herokuapp.com/quotes/new', {
+                method: 'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    content : text,
+                    author : by
+                })
+            }).then((res) => res.json())
+
             console.log(result);
-            
 
         }
     </script>
