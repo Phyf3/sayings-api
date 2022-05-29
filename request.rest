@@ -1,0 +1,11 @@
+GET http://localhost:3000/quotes
+
+###
+POST http://localhost:3000/quotes/new
+Content-Type: application/json
+
+
+{
+    "content": "Siuuuuuuuu",
+    "author" : "Ronaldo"
+}

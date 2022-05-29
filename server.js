@@ -5,7 +5,12 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(bodyParser.json())
 
-mongoose.connect('mongodb://localhost/api-tut',{
+require('dotenv').config()
+const dbpassword = process.env.DB_PWD
+const db_user = process.env.DB_USER
+const MONOGODB_URI = `mongodb+srv://${db_user}:${dbpassword}@quotes.b4hwg.mongodb.net/test`
+
+mongoose.connect(process.env.MONGODB_URI || MONOGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -24,6 +29,6 @@ const QuotesRoutes = require('./routes/Quotes');
 
 app.use('/quotes', QuotesRoutes)
 
-app.listen(3000, () => {
-    console.log("Listening on port 3000")
+app.listen(process.env.PORT ||  3000, () => {
+    console.log("Listening...")
 })
