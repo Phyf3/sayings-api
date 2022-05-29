@@ -1,7 +1,7 @@
-GET http://localhost:3000/quotes
+GET http://localhost:9999/quotes
 
 ###
-POST http://localhost:3000/quotes/new
+POST http://localhost:9999/quotes/new
 Content-Type: application/json
 
 
